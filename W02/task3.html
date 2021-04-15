@@ -1,0 +1,70 @@
+<html>
+        <head>
+                <title>W02: Task3</title>
+        </head>
+        <body>
+               <div align="center"> <label> x0:<input type="text" id="x0" maxlength="5" /> </label> 
+               <label> y0:<input type="text" id="y0" maxlength="5" /> </label> 
+               <label> z0:<input type="text" id="z0" maxlength="5" /> </label><br> </div>
+               <div align="center"> <label> x1:<input type="text" id="x1" maxlength="5" /> </label> 
+               <label> y1:<input type="text" id="y1" maxlength="5" /> </label>
+               <label> z1:<input type="text" id="z1" maxlength="5" /> </label><br> </div>
+               <div align="center"> <label> x2:<input type="text" id="x2" maxlength="5" /> </label>
+               <label> y2:<input type="text" id="y2" maxlength="5" /> </label> 
+               <label> z2:<input type="text" id="z2" maxlength="5" /> </label><p> </div>
+
+               <div align="center"> <input type="button" value="Calculate" id="calculate" /> <p>
+               <div align="center"> <label>S:<input type="text" id="S" maxlength="5" /></label> 
+
+                
+                <script src="vec3.js"></script>
+                <script>
+                        function buttonClick()
+                        {
+                               
+                               var A = new Vec3(x0.value ,y0.value ,z0.value);
+                               var B = new Vec3(x1.value ,y1.value ,z1.value);
+                               var C = new Vec3(x2.value ,y2.value ,z2.value);
+                               S.value = cal(A,B,C);
+                               console.log(S.value);
+                        }
+
+                        function cal(A,B,C)
+                        {
+
+                                var AB = dis_2(A,B);
+                                var AC = dis_2(A,C);
+                                var AB_AC = inner(A,B,C);
+                               return  Math.sqrt(AB*AC - Math.pow((AB_AC),2)) / 2;
+                        }
+                        function dis_2(start, end)
+                        {
+                                return (Math.pow((end.x - start.x),2) + Math.pow((end.y - start.y),2) + Math.pow((end.z - start.z),2));
+                        }
+ 
+                        function inner(A,B,C)
+                        {
+                                return (((B.x - A.x) * (C.x - A.x)) + ((B.y - A.y) * (C.y - A.y)) + ((B.z - A.z) * (C.z - A.z)));
+                        }
+
+        
+                        let x0 = document.getElementById('x0'); // x0.value = '0';
+                        let y0 = document.getElementById('y0'); // y0.value = '0';
+                        let z0 = document.getElementById('z0'); // z0.value = '0';
+                        let x1 = document.getElementById('x1'); // x1.value = '0';
+                        let y1 = document.getElementById('y1'); // y1.value = '0';
+                        let z1 = document.getElementById('z1'); // z1.value = '0';
+                        let x2 = document.getElementById('x2'); // x2.value = '0';
+                        let y2 = document.getElementById('y2'); // y2.value = '0';
+                        let z2 = document.getElementById('z2'); // z2.value = '0';
+                        
+                        var S = document.getElementById('S');
+
+                        let calculate = document.getElementById('calculate');
+                        calculate.addEventListener('click', buttonClick);
+
+                        
+                </script>
+        </body>
+</html>
+
