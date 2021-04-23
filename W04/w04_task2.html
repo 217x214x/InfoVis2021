@@ -8,16 +8,17 @@
                         var padding = 10;
                         var height = 20;
                         var svg = d3.select("body").append("svg");
-                        svg.attr("width",1500);
-                        d3.csv("https://217x214x.github.io/InfoVis2021/W04/w04_task2.csv",draw);
+                        svg.attr("width",1500)
+                           .attr("height", 16+padding  + 47 * ( height + padding));
+                        d3.csv("https://217x214x.github.io/InfoVis2021/W04/population_Japan.csv",draw);
                         function draw(data){
                                 svg.selectAll("rect")
                                    .data(data)
                                    .enter()
                                    .append("rect")
-                                   .attr("x", padding*7)
+                                   .attr("x", padding*8)
                                    .attr("y", function(d,i){ return padding + i * ( height + padding ); })
-                                   .attr("width", function(d){ return d.length; })
+                                   .attr("width", function(d){ return d.population; })
                                    .attr("height", height);
                                 svg.selectAll("text")
                                    .data(data)
@@ -25,9 +26,18 @@
                                    .append("text")
                                    .attr("x",padding)
                                    .attr("y", function(d,i){ return 16+padding  + i * ( height + padding ); })
-                                   .text(function(d){ return "label" + d.label ;});
+                                   .text(function(d){ 
+                                                if( d.todoufuken == "東京" )
+                                                   {   return ( d.todoufuken + "都") ;}
+                                                else if( d.todoufuken == "大阪" || d.todoufuken == "京都")
+                                                   {   return ( d.todoufuken + "府") ;}
+                                                else if( d.todoufuken == "北海道")
+                                                   {  return d.todoufuken ;}
+                                                else 
+                                                   {   return ( d.todoufuken + "県") ;}
+                                                });
                                    
-                        };
+                      };
                 </script>
         </body>
 </html>
