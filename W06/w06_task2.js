@@ -4,8 +4,8 @@ d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
 
         var config = {
             parent: '#drawing_region',
-            width: 1200,
-            height: 512,
+            width: 900,
+            height: 500,
             margin: {top:30, right:10, bottom:20, left:40}
         };
 
@@ -59,10 +59,10 @@ class ScatterPlot {
            // .range( [0, self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(10);
+            .ticks(20);
         
         self.yaxis = d3.axisLeft( self.yscale )
-           // .ticks(3);
+            .ticks(10);
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
