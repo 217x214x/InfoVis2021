@@ -53,6 +53,7 @@ class LineChart{
             .tickSizeOuter(0);
 
         self.yaxis = d3.axisLeft( self.yscale )
+            .ticks(5)
             .tickSizeOuter(0);
 
         // Draw the axis
