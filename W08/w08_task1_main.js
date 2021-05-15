@@ -1,11 +1,11 @@
-d3.csv("https://217x214x.github.io/InfoVis2021/W04/population_Japan.csv")
+d3.csv("https://217x214x.github.io/InfoVis2021/W04/w04_task2.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.label; d.y = +d.length; });
 
         var config = {
             parent: '#drawing_region',
-            width: 1500,
-            height: 1000,
+            width: 400,
+            height: 128,
             margin: { top:10, right:10, bottom:20, left:60}
         };
 
@@ -19,8 +19,8 @@ class BarChart{
     constructor( config, data ) { 
         this.config = {
             parent: config.parent,
-            width: config.width || 1500,
-            height: config.height || 1000,
+            width: config.width || 256,
+            height: config.height || 256,
             margin: config.margin || {top:10, right:10, bottom:20, left:60}
         }
         this.data = data;
@@ -50,7 +50,7 @@ class BarChart{
             .range([0, self.inner_height])
             .paddingInner(0.1);
 
-        // Initialize axes
+        // Initialize axis
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(5)
             .tickSizeOuter(0);
@@ -61,19 +61,19 @@ class BarChart{
         // Draw the axis
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`)
-            //.call( xaxis );
+            //.call( self.xaxis );
 
         self.yaxis_group = self.chart.append('g')
-            //.call( yaxis );
+            //.call( self.yaxis );
  
     }
 
     update() { 
         let self = this;
        
-        //const xmax = d3.max( self.data, d => d.length ) ;
-        self.xscale.domain( [0, d3.max(self.data, d => d.length)] );
-
+        const xmax = d3.max( self.data, d => d.length ) ;
+        console.log(xmax);
+        self.xscale.domain( [0, xmax] );
         self.yscale.domain( self.data.map(d => d.label) );
 
 
