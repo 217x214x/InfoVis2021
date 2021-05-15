@@ -37,21 +37,6 @@ class PieChart{
             .append('g')
             .attr('transform', `translate(${self.config.width/2}, ${self.config.height/2})`);
 
-       // self.chart = self.svg.append('g')
-         //   .attr('transform', `translate(${self.config.width/2+self.config.margin.left}, ${self.config.height/2+self.config.margin.top})`);
-       
-        //self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
-        //self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
-
-        // Initialize axis scales
-        //self.xscale = d3.scaleLinear()
-         //   .domain([0, d3.max(self.data, d => d.length)])
-          //  .range([0, self.inner_width]);
-
-        //self.yscale = d3.scaleBand()
-           // .domain(self.data.map(d => d.label))
-          //  .range([0, self.inner_height])
-
  
     }
 
@@ -70,7 +55,7 @@ class PieChart{
               .value( d => d.length);
 
         const arc = d3.arc()
-              .innerRadius(0)
+              .innerRadius(50)
               .outerRadius(self.config.height/2);
         
         // Draw pies
@@ -81,6 +66,13 @@ class PieChart{
             .attr("stroke",'white' )
             .attr("stroke-width", '2px');
 
-
-    }
+ 
+        self.svg.selectAll("text").data(pie(self.data)).enter().append("text")
+            .attr("fill", "white")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr("dy", "5px")
+            .attr("font", "10px")
+            .attr("text-anchor", "middle")
+            .text(function(d) { return d.data.label; });
+        }
 }
