@@ -44,7 +44,7 @@ class LineChart{
         self.xscale = d3.scaleLinear()
             .range([0, self.inner_width]);
 
-        self.yscale = d3.scaleBand()
+        self.yscale = d3.scaleLinear()
             .range([0, self.inner_height])
 
         // Initialize axis
@@ -74,10 +74,8 @@ class LineChart{
         self.xscale.domain( [0, xmax] );
         const ymax = d3.max( self.data, d => d.y);
         self.yscale.domain( [0, ymax] );
+        
        
-        const line = d3.line()
-              .x( d => d.x )
-              .y( d => d.y ) 
 
         self.render();
 
@@ -86,12 +84,18 @@ class LineChart{
 
     render() { 
         let self = this;
+       
+        const line = d3.line()
+              .x( d => self.xscale(d.x) )
+              .y( d => self.yscale(d.y) ); 
         
-        self.chart.selectAll("path").data(self.data).enter()
-            .attr("d", line(data))
+
+        self.chart.append("path")
+            .attr("d", line(self.data))
             .attr("stroke", "black")
             .attr("fill", "none");
 
+        
         self.xaxis_group
             .call( self.xaxis );
 
