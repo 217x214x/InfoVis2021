@@ -9,14 +9,14 @@
                         var height = 20;
                         var svg = d3.select("body").append("svg");
                         svg.attr("width",1500)
-                           .attr("height", 16+padding  + 47 * ( height + padding));
-                        d3.csv("https://217x214x.github.io/InfoVis2021/W04/population_Japan.csv",draw);
+                           .attr("height",1000);
+                        d3.csv("https://217x214x.github.io/InfoVis2021/W04/w04_task2.csv",draw);
                         function draw(data){
                                 svg.selectAll("rect")
                                    .data(data)
                                    .enter()
                                    .append("rect")
-                                   .attr("x", padding*8)
+                                   .attr("x", padding*7)
                                    .attr("y", function(d,i){ return padding + i * ( height + padding ); })
                                    .attr("width", function(d){ return d.length; })
                                    .attr("height", height);
@@ -26,18 +26,9 @@
                                    .append("text")
                                    .attr("x",padding)
                                    .attr("y", function(d,i){ return 16+padding  + i * ( height + padding ); })
-                                   .text(function(d){ 
-                                                if( d.label == "東京" )
-                                                   {   return ( d.label + "都") ;}
-                                                else if( d.label == "大阪" || d.label == "京都")
-                                                   {   return ( d.label + "府") ;}
-                                                else if( d.label == "北海道")
-                                                   {  return d.label ;}
-                                                else 
-                                                   {   return ( d.label + "県") ;}
-                                                });
+                                   .text(function(d){ return "label" + d.label.toString() ;});
                                    
-                      };
+                        };
                 </script>
         </body>
 </html>
