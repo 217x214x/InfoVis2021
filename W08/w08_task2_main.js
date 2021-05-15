@@ -1,6 +1,6 @@
-d3.csv("https://217x214x.github.io/InfoVis2021/W04/w04_task2.csv")
+d3.csv("https://217x214x.github.io/InfoVis2021/W08/data_task2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.label; d.y = +d.length; });
+        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
 
         var config = {
             parent: '#drawing_region',
@@ -9,12 +9,12 @@ d3.csv("https://217x214x.github.io/InfoVis2021/W04/w04_task2.csv")
             margin: { top:10, right:10, bottom:20, left:60}
         };
 
-        const bar_chart = new BarChart( config, data);
-        bar_chart.update();
+        const line_chart = new LineChart( config, data);
+        line_chart.update();
      })
      
 
-class BarChart{
+class LineChart{
      
     constructor( config, data ) { 
         this.config = {
@@ -42,13 +42,10 @@ class BarChart{
 
         // Initialize axis scales
         self.xscale = d3.scaleLinear()
-         //   .domain([0, d3.max(self.data, d => d.length)])
             .range([0, self.inner_width]);
 
         self.yscale = d3.scaleBand()
-           // .domain(self.data.map(d => d.label))
             .range([0, self.inner_height])
-            .paddingInner(0.1);
 
         // Initialize axis
         self.xaxis = d3.axisBottom( self.xscale )
@@ -72,10 +69,14 @@ class BarChart{
         let self = this;
        
 
-        const xmax = d3.max( self.data, d => d.length ) ;
-        self.xscale.domain( [0, 1.8*xmax] );
-        self.yscale.domain( self.data.map(d => d.label) );
-
+        const xmax = d3.max( self.data, d => d.x ) ;
+        self.xscale.domain( [0, xmax] );
+        const ymax = d3.max( self.data, d => d.y);
+        self.yscale.domain( [0, ymax] );
+       
+        const line = d3.line()
+              .x( d => d.x )
+              .y( d => d.y ) 
 
         self.render();
 
@@ -85,13 +86,10 @@ class BarChart{
     render() { 
         let self = this;
         
-        // Draw bars
-        self.chart.selectAll("rect").data(self.data).enter()
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", d => self.yscale(d.label))
-            .attr("width", d => self.xscale(d.length))
-            .attr("height", self.yscale.bandwidth());
+        self.chart.selectAll("path").data(self.data).enter()
+            .attr("d", line(data))
+            .attr("stroke", "black")
+            .attr("fill", "none");
 
         self.xaxis_group
             .call( self.xaxis );
