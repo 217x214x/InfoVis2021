@@ -4,8 +4,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/W04/population_Japan.csv")
 
         var config = {
             parent: '#drawing_region',
-            width: 256,
-            height: 128,
+            width: 1500,
+            height: 1000,
             margin: { top:10, right:10, bottom:20, left:60}
         };
 
@@ -19,8 +19,8 @@ class BarChart{
     constructor( config, data ) { 
         this.config = {
             parent: config.parent,
-            width: config.width || 256,
-            height: config.height || 256,
+            width: config.width || 1500,
+            height: config.height || 1000,
             margin: config.margin || {top:10, right:10, bottom:20, left:60}
         }
         this.data = data;
