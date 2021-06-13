@@ -97,7 +97,7 @@ class ScatterPlot1 {
         circles
             .attr("r", circle_radius )
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
-            .attr("cy", d => self.yscale( self.yvalue(d) ) );
+            .attr("cy", d => self.yscale( self.yvalue(d) ) )
             .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
 
         circles
