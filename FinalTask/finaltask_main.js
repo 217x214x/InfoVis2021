@@ -21,8 +21,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/GDPPerCapita_to_NetNati
 
         scatter_plot1 = new ScatterPlot1( {
             parent: '#drawing_region_scatterplot1',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'GDP per capita  [US dollars]',
             ylabel: 'Net National Income per capita  [US dollars]',
@@ -47,8 +47,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/AdjustedNetNationalInco
 
         scatter_plot2 = new ScatterPlot2( {
             parent: '#drawing_region_scatterplot2',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'GDP per capita Growth [%]',
             ylabel: 'Net National Income per capita Growth  [%]',
@@ -73,8 +73,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman_to_Adjust
 
         scatter_plot3 = new ScatterPlot3( {
             parent: '#drawing_region_scatterplot3',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Births per capita  [人]',
             ylabel: 'Net National Income per capita Growth [%]',
