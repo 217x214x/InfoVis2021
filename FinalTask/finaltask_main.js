@@ -50,8 +50,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/AdjustedNetNationalInco
             width: 256,
             height: 256,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'GDP per capita  [US dollars]',
-            ylabel: 'Net National Income per capita  [US dollars]',
+            xlabel: 'GDP per capita Growth [%]',
+            ylabel: 'Net National Income per capita Growth  [%]',
             cscale: color_scale
         }, input_data2 );
         scatter_plot2.update();
@@ -76,8 +76,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman_to_Adjust
             width: 256,
             height: 256,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'GDP per capita  [US dollars]',
-            ylabel: 'Net National Income per capita  [US dollars]',
+            xlabel: 'Birth per capita  [人]',
+            ylabel: 'Net National Income per capita Growth [%]',
             cscale: color_scale
         }, input_data3 );
         scatter_plot3.update();
@@ -102,8 +102,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman_to_GDPPer
             width: 256,
             height: 256,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'GDP per capita  [US dollars]',
-            ylabel: 'Net National Income per capita  [US dollars]',
+            xlabel: 'Birth per capita  [人]',
+            ylabel: 'Net National Income per capita  [%]',
             cscale: color_scale
         }, input_data4 );
         scatter_plot4.update();
