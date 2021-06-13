@@ -34,7 +34,7 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/GDPPerCapita_to_NetNati
         console.log( error );
     });
 
-d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/女性一人当たり出生数/API_SP.DYN.TFRT.IN_DS2_en_csv_v2_2449143.csv")
+d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman/API_SP.DYN.TFRT.IN_DS2_en_csv_v2_2449143.csv")
     .then( data => {
         line_input_data3 = data;
         line_input_data3.forEach( d => {
