@@ -115,10 +115,16 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman_to_GDPPer
 
 function Filter() {
     if ( filter.length == 0 ) {
-        scatter_plot.data = line_input_data;
+        scatter_plot1.data = input_data1;
+        scatter_plot2.data = input_data2;
+        scatter_plot3.data = input_data3;
+        scatter_plot4.data = input_data4;
     }
     else {
-        scatter_plot.data = input_data.filter( d => filter.includes( d.country ) );
+        scatter_plot1.data = input_data1.filter( d => filter.includes( d.Country_Name ) );
+        scatter_plot2.data = input_data2.filter( d => filter.includes( d.Country_Name ) );
+        scatter_plot3.data = input_data3.filter( d => filter.includes( d.Country_Name ) );
+        scatter_plot4.data = input_data4.filter( d => filter.includes( d.Country_Name ) );
     }
     scatter_plot.update();
 }
