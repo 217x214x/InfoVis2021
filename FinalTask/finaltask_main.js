@@ -99,8 +99,8 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/BirthPerWoman_to_GDPPer
 
         scatter_plot4 = new ScatterPlot4( {
             parent: '#drawing_region_scatterplot4',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Births per capita  [人]',
             ylabel: 'Net National Income per capita  [%]',
