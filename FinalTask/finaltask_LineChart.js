@@ -1,10 +1,11 @@
-class LineChart1 {
+class LineChart {
     constructor (config, data) {
         this.config = {
             parent: config.parent,
             width: config.width || 256,
             height: config.height || 256,
             margin: config.margin || {top:10, right:10, bottom:10, left:10},
+            title:  config.title  || '',
             xlabel: config.xlabel || '',
             ylabel: config.ylabel || '',
            // cscale: config.cscale
@@ -47,6 +48,16 @@ class LineChart1 {
 
         self.yaxis_group = self.chart.append('g');
 
+        const title_space = 10;
+        self.svg.append('text')
+            .style('font-size', '20px')
+            .style('font-weight', 'bold')
+            .attr('text-anchor', 'middle')
+            .attr('x', self.config.width / 2)
+            .attr('y', self.config.margin.top - title_space)
+            .text( self.config.title );
+
+
         const xlabel_space = 40;
         self.svg.append('text')
             .style('font-size', '12px')
@@ -82,32 +93,56 @@ class LineChart1 {
         const ymax = d3.max( self.aggregated_data, self.yvalue );
         self.yscale.domain([ymin, ymax]);
 
+        self.line = d3.line()
+            .x( d => self.xscale(d.xvalue) )
+            .y( d => self.yscale(d.yvalue) );
+
+        self.area = d3.area()
+            .x( d => self.xscale(d.x) )
+            .y1( d => self.yscale(d.y) )
+            .y0( self.inner_height );
+
+        
         self.render();
     }
 
     render() {
         let self = this;
 
-        self.chart.selectAll(".bar")
-            .data(self.aggregated_data)
-            .join("rect")
-            .attr("class", "bar")
-            .attr("x", d => self.xscale( self.xvalue(d) ) )
-            .attr("y", d => self.yscale( self.yvalue(d) ) )
-            .attr("width", self.xscale.bandwidth())
-            .attr("height", d => self.inner_height - self.yscale( self.yvalue(d) ))
-            .attr("fill", d => self.config.cscale( self.cvalue(d) ))
-            .on('click', function(ev,d) {
-                const is_active = filter.includes(d.key);
-                if ( is_active ) {
-                    filter = filter.filter( f => f !== d.key );
-                }
-                else {
-                    filter.push( d.key );
-                }
-                Filter();
-                d3.select(this).classed('active', !is_active);
-            });
+       // self.chart.selectAll(".bar")
+         //   .data(self.aggregated_data)
+         //   .join("rect")
+         //   .attr("class", "bar")
+         //   .attr("x", d => self.xscale( self.xvalue(d) ) )
+         //   .attr("y", d => self.yscale( self.yvalue(d) ) )
+         //   .attr("width", self.xscale.bandwidth())
+         //   .attr("height", d => self.inner_height - self.yscale( self.yvalue(d) ))
+         //   .attr("fill", d => self.config.cscale( self.cvalue(d) ));
+
+        //const area_color = 'mistyrose';
+       // self.chart.append("path")
+         //   .attr('d', self.area(self.data));
+           // .attr('stroke', area_color)
+           // .attr('fill', area_color);
+
+        const line_width = 3;
+        const line_color = 'firebrick';
+        self.chart.append("path")
+            .attr('d', self.line(self.data))
+            .attr('stroke', line_color)
+            .attr('stroke-width', line_width)
+            .attr('fill', 'none');
+
+        const circle_radius = 5;
+        const circle_color = 'firebrick';
+        self.chart.selectAll("circle")
+            .data(self.data)
+            .enter()
+            .append("circle")
+            .attr('cx', self.line.x())
+            .attr('cy', self.line.y())
+            .attr('r', circle_radius)
+            .attr('fill', circle_color);
 
         self.xaxis_group
             .call(self.xaxis);

@@ -70,9 +70,9 @@ class ScatterPlot {
     update() {
         let self = this;
 
-        self.cvalue = d => d.species;
-        self.xvalue = d => d.sepal_length;
-        self.yvalue = d => d.sepal_width;
+        self.cvalue = d => d.Country_Name;
+        self.xvalue = d => d.GDP_per_capita;
+        self.yvalue = d => d.Net_National_Income_per_capita;
 
         const xmin = d3.min( self.data, self.xvalue );
         const xmax = d3.max( self.data, self.xvalue );
@@ -97,14 +97,14 @@ class ScatterPlot {
         circles
             .attr("r", circle_radius )
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
-            .attr("cy", d => self.yscale( self.yvalue(d) ) )
-            .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
+            .attr("cy", d => self.yscale( self.yvalue(d) ) );
+           // .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
 
         circles
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
                     .style('opacity', 1)
-                    .html(`<div class="tooltip-label">${d.species}</div>(${d.sepal_length}, ${d.sepal_length})`);
+                    .html(`<div class="tooltip-label">${d.Country_Name}</div>(${d.GDP_per_capita}, ${d.Net_National_Income_per_capita})`);
             })
             .on('mousemove', (e) => {
                 const padding = 10;
@@ -115,7 +115,19 @@ class ScatterPlot {
             .on('mouseleave', () => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
-            });
+            })
+            .on('click', function(ev,d){
+                const is_active = filter.includes(d.Country_Name);
+                if( is_active ) {
+                   filter = filter.filter( f => f !== d.Country_Name );
+                }
+                else {
+                    filter.push( d.Country_Name );
+                }
+                Filter();
+                d3.select(this).classed('active', !is_active);
+           });
+
 
         self.xaxis_group
             .call( self.xaxis );
