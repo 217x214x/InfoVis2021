@@ -126,5 +126,8 @@ function Filter() {
         scatter_plot3.data = input_data3.filter( d => filter.includes( d.Country_Name ) );
         scatter_plot4.data = input_data4.filter( d => filter.includes( d.Country_Name ) );
     }
-    scatter_plot.update();
+    scatter_plot1.update();
+    scatter_plot2.update();
+    scatter_plot3.update();
+    scatter_plot4.update();
 }
