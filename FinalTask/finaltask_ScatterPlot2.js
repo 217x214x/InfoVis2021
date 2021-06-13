@@ -1,4 +1,4 @@
-class ScatterPlot {
+class ScatterPlot2 {
 
     constructor( config, data ) {
         this.config = {
@@ -71,8 +71,8 @@ class ScatterPlot {
         let self = this;
 
         self.cvalue = d => d.Country_Name;
-        self.xvalue = d => d.GDP_per_capita;
-        self.yvalue = d => d.Net_National_Income_per_capita;
+        self.xvalue = d => d.GDP_per_capita_Growth;
+        self.yvalue = d => d.Net_National_Income_per_capita_Growth;
 
         const xmin = d3.min( self.data, self.xvalue );
         const xmax = d3.max( self.data, self.xvalue );
@@ -98,13 +98,13 @@ class ScatterPlot {
             .attr("r", circle_radius )
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
             .attr("cy", d => self.yscale( self.yvalue(d) ) );
-           // .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
+            .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
 
         circles
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
                     .style('opacity', 1)
-                    .html(`<div class="tooltip-label">${d.Country_Name}</div>(${d.GDP_per_capita}, ${d.Net_National_Income_per_capita})`);
+                    .html(`<div class="tooltip-label">${d.Country_Name}</div>(${d.GDP_per_capita_Growth}, ${d.Net_National_Income_per_capita_Growth})`);
             })
             .on('mousemove', (e) => {
                 const padding = 10;
