@@ -115,18 +115,18 @@ class ScatterPlot4 {
             .on('mouseleave', () => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
-            })
-            .on('click', function(ev,d){
-                const is_active = filter.includes(d.Country_Name);
-                if( is_active ) {
-                   filter = filter.filter( f => f !== d.Country_Name );
-                }
-                else {
-                    filter.push( d.Country_Name );
-                }
-                Filter();
-                d3.select(this).classed('active', !is_active);
-           });
+            });
+ //           .on('click', function(ev,d){
+ //               const is_active = filter.includes(d.Country_Name);
+ //               if( is_active ) {
+ //                  filter = filter.filter( f => f !== d.Country_Name );
+ //               }
+ //               else {
+ //                   filter.push( d.Country_Name );
+ //               }
+ //               Filter();
+ //               d3.select(this).classed('active', !is_active);
+ //          });
 
 
         self.xaxis_group
