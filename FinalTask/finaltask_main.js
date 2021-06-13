@@ -35,15 +35,12 @@ d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/GDPPerCapita_to_NetNati
     });
 
 d3.csv("https://217x214x.github.io/InfoVis2021/FinalTask/女性一人当たり出生数/API_SP.DYN.TFRT.IN_DS2_en_csv_v2_2449143.csv")
-      .then( function(data) {
-        console.log(data);
-        line_input_data1 = data;
-        for(var i = 1; i<line_input_data1.length;i++){
-           for(var j = 0; j<line_input_data1[i].length;j++){
-                 if(j == 0) data.d.Country_Name = +d.Country_Name;
-                 for(var i = 1; i<d.columns.length; i++) d.columns[i]
-                
-        }};
+    .then( data => {
+        line_input_data3 = data;
+        line_input_data3.forEach( d => {
+       //     d. = +d.;
+         //   d. = +d.;
+        });
         line_chart1 = new LineChart( {
             parent: '#drawing_region_linechart1',
             width: 256,
