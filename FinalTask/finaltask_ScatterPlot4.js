@@ -1,4 +1,4 @@
-class ScatterPlot1 {
+class ScatterPlot4 {
 
     constructor( config, data ) {
         this.config = {
